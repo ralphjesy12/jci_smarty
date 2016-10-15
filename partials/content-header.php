@@ -60,7 +60,7 @@ Example Usage:  class="clearfix sticky header-sm transparent noborder"
             </ul>
             <!-- Logo -->
             <a class="logo pull-left" href="<?=site_url()?>">
-                <img src="<?=get_stylesheet_directory_uri()?>/assets/img/Logo-JCI-Imus-Wagayway.png" alt="" />
+                <img src="<?=get_stylesheet_directory_uri()?>/assets/img/Logo-JCI-Imus-Wagayway-500.png" alt="" />
             </a>
             <div class="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
                 <nav class="nav-main">
