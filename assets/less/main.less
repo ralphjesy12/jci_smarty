@@ -216,3 +216,26 @@ footer{
         }
     }
 }
+
+
+ul.widget-twitter li>span>a{
+    display: inline-block;
+}
+
+
+.sticky-side{
+    &.sticky-side-left{
+        a{
+            overflow: hidden;
+            span{
+                opacity: 0;
+            }
+            &:hover{
+                width:200px!important;
+                span{
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

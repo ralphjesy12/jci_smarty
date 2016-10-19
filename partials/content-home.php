@@ -65,7 +65,7 @@
             </div>
             <div class="col-xs-12">
                 <p class="text-center">
-                    <button type="button" class="btn btn-default btn-readmore uppercase size-12">Read more <i class="fa fa-fw fa-angle-double-right size-16 nopadding"></i></button>
+                    <a href="<?=site_url('about-us')?>" class="btn btn-default btn-readmore uppercase size-12">Read more <i class="fa fa-fw fa-angle-double-right size-16 nopadding"></i></a>
                 </p>
             </div>
         </div>
@@ -105,7 +105,7 @@
                             <p>Working together to protect our shared home</p>
                         </div><!-- /left text -->
                         <div class="col-md-4 col-sm-4 text-right"><!-- right btn -->
-                            <a href="#purchase" rel="nofollow" target="_blank" class="btn btn-black btn-lg">VIEW ALL PROJECTS</a>
+                            <a href="<?=site_url('our-projects')?>" rel="nofollow" target="_blank" class="btn btn-black btn-lg">VIEW ALL PROJECTS</a>
                         </div><!-- /right btn -->
                     </div>
                 </div>
@@ -156,7 +156,7 @@
             </div>
         </div>
         <div class="row">
-            <button class="btn btn-warning btn-lg btn-yellow margin-top-50 btn-joinnow uppercase">Join Us Now</button>
+            <a href="<?=site_url('register')?>" class="btn btn-warning btn-lg btn-yellow margin-top-50 btn-joinnow uppercase width-150">Join Us Now</a>
         </div>
     </div>
 </section>
@@ -246,7 +246,7 @@
                                 <p>Working together to protect our shared home</p>
                             </div><!-- /left text -->
                             <div class="col-md-4 col-sm-4 text-right"><!-- right btn -->
-                                <a href="#purchase" rel="nofollow" target="_blank" class="btn btn-black">VIEW ALL NEWS</a>
+                                <a href="<?=site_url('category/news')?>" rel="nofollow" target="_blank" class="btn btn-black">VIEW ALL NEWS</a>
                             </div><!-- /right btn -->
                         </div>
                     </div>
