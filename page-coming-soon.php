@@ -4,15 +4,7 @@
 <!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
 <!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
 <head>
-    <meta charset="utf-8" />
-    <title>JCI Imus Wagayway Official Website</title>
-    <meta name="keywords" content="HTML5,CSS3,Template" />
-    <meta name="description" content="" />
-    <meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
-
-    <!-- mobile settings -->
-    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
-    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <?php wp_head();?>
 
     <!-- WEB FONTS : use %7C instead of | (pipe) -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />
@@ -27,6 +19,16 @@
     <!-- PAGE LEVEL SCRIPTS -->
     <link href="<?=get_template_directory_uri()?>/assets/css/header-1.css" rel="stylesheet" type="text/css" />
     <link href="<?=get_template_directory_uri()?>/assets/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme" />
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="<?=get_stylesheet_directory_uri();?>/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="<?=get_stylesheet_directory_uri();?>/assets/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="<?=get_stylesheet_directory_uri();?>/assets/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="<?=get_stylesheet_directory_uri();?>/assets/favicon/manifest.json">
+    <link rel="mask-icon" href="<?=get_stylesheet_directory_uri();?>/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="<?=get_stylesheet_directory_uri();?>/assets/favicon/favicon.ico">
+    <meta name="msapplication-config" content="<?=get_stylesheet_directory_uri();?>/assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
 </head>
 
 <!--
@@ -51,7 +53,24 @@ BACKGROUND IMAGE [together with .boxed class]
 data-background="<?=get_template_directory_uri()?>/assets/images/boxed_background/1.jpg"
 -->
 <body class="enable-animation">
+    <div id="fb-root"></div>
+    <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '540263062836547',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+  };
 
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 
     <!-- wrapper -->
     <div id="wrapper">
@@ -64,7 +83,7 @@ data-background="<?=get_template_directory_uri()?>/assets/images/boxed_backgroun
 
                     <ul class="pull-right list-inline mobile-block list-social-icons margin-top-30 hidden-xs">
                         <li>
-                            <a href="#" class="social-icon social-icon-transparent social-icon-sm social-facebook pull-left" data-toggle="tooltip" data-placement="bottom" title="Facebook">
+                            <a href="https://www.facebook.com/jciimuswagayway/" class="social-icon social-icon-transparent social-icon-sm social-facebook pull-left" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Facebook">
                                 <i class="icon-facebook"></i>
                                 <i class="icon-facebook"></i>
                             </a>
@@ -76,7 +95,7 @@ data-background="<?=get_template_directory_uri()?>/assets/images/boxed_backgroun
                             </a>
                         </li>
                         <li>
-                            <a href="#" data-toggle="modal" data-target="#contactModal" class="social-icon social-icon-transparent social-icon-sm pull-left" data-placement="bottom" title="Contact Us">
+                            <a href="mailto:contactus@jciimuswagayway.org" data-toggle="modal" data-target="#contactModal" class="social-icon social-icon-transparent social-icon-sm pull-left" data-placement="bottom" title="Contact Us">
                                 <i class="et-envelope"></i>
                                 <i class="et-envelope"></i>
                             </a>
@@ -84,7 +103,7 @@ data-background="<?=get_template_directory_uri()?>/assets/images/boxed_backgroun
                     </ul>
 
                     <!-- Logo -->
-                    <a class="logo pull-left" href="index.html">
+                    <a class="logo pull-left" href="<?=site_url()?>">
                         <img src="<?=get_stylesheet_directory_uri()?>/assets/img/Logo-JCI-Imus-Wagayway-500-white.png" alt="" />
                     </a>
 
@@ -110,9 +129,12 @@ data-background="<?=get_template_directory_uri()?>/assets/images/boxed_backgroun
                         <img src="<?=get_stylesheet_directory_uri()?>/assets/img/coming-soon.png" style="display:block;margin:0 auto;height:100px;">
 
                         <div style="max-width:550px; margin:auto; margin-top:60px; margin-bottom:80px;">
-                            <div class="countdown squared dark theme-style" data-labels="years,months,weeks,days,hour,min,sec" data-from="December 24, 2016 23:59:59"><!-- Example Date From: December 31, 2018 15:03:26 --></div>
+                            <div class="countdown squared dark theme-style" data-labels="years,months,weeks,days,hour,min,sec" data-from="January 01, 2017 00:00:00"><!-- Example Date From: December 31, 2018 15:03:26 --></div>
                         </div>
-
+                        <a href="#" id="shareBtn" class=" btn btn-block btn-social btn-facebook" style=" max-width: 300px; text-align: center; margin: 0 auto;
+">
+                            <i class="fa fa-facebook"></i> Share us on Facebook
+                        </a>
                     </div>
                 </div>
 
@@ -163,6 +185,15 @@ data-background="<?=get_template_directory_uri()?>/assets/images/boxed_backgroun
 
         </script>
 
+        <script>
+        document.getElementById('shareBtn').onclick = function() {
+          FB.ui({
+            method: 'share',
+            display: 'popup',
+            href: 'http://jciimuswagayway.org/',
+          }, function(response){});
+        }
+        </script>
 
     </body>
     </html>

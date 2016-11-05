@@ -5,7 +5,7 @@
 
         <!-- Slide 1 -->
         <li>
-            <img src="<?=site_url('/wp-content/uploads/sites/2/2016/10/banner.jpg')?>" alt="image01" />
+            <img src="<?=get_stylesheet_directory_uri()?>/assets/img/banner.jpg" alt="image01" />
             <div class="ei-title">
                 <div class="container">
                         <h2>My World Caravan</h2>
@@ -19,7 +19,7 @@
     <!-- Thumbnails -->
     <ul class="ei-slider-thumbs">
         <li class="ei-slider-element">Current</li>
-        <li><a href="#">Slide 1</a><img src="<?=site_url('/wp-content/uploads/sites/2/2016/10/banner.jpg')?>" alt="thumb01" /></li>
+        <li><a href="#">Slide 1</a><img src="<?=get_stylesheet_directory_uri()?>/assets/img/banner.jpg" alt="thumb01" /></li>
     </ul>
     <!-- /Thumbnails -->
 
