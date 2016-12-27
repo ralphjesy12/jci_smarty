@@ -9,8 +9,53 @@ function unhook_thematic_functions() {
     if (!current_user_can('administrator') && !is_admin()) {
         show_admin_bar(false);
     }
+
+    add_image_size('thumb-5by6',360,432,true);
+    add_image_size('thumb-5by2',750,300,true);
+    add_image_size('thumb-3by2',600,400,true);
+    add_image_size('thumb-post-single',800,350,true);
+
+
+
+
 }
 add_action( 'init', 'unhook_thematic_functions' );
+
+// Gallery Shortcode
+remove_shortcode('gallery');
+function custom_gallery_shortcode( $atts ) {
+
+    $atts = shortcode_atts( array(
+        'columns' => '3',
+        'ids' => '',
+    ), $atts );
+
+    ob_start();
+    $atts['ids'] = explode(',',$atts['ids']);
+
+
+    if(!empty($atts['ids'])):
+        ?>
+        <h4>More Photos</h4>
+        <div class="masonry-gallery columns-<?=$atts['columns']?> clearfix lightbox" data-img-big="1" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
+            <?php
+            foreach ($atts['ids'] as $key => $id) {
+                $full = wp_get_attachment_image_url($id,'full');
+                $thumb = wp_get_attachment_image_url($id,'thumb-3by2');
+                ?>
+                <a class="image-hover" href="<?=$full?>">
+                    <img src="<?=$thumb?>" alt="">
+                </a>
+                <?php
+            }
+            ?>
+        </div>
+        <?php
+    endif;
+
+    return ob_get_clean();
+}
+add_shortcode( 'gallery', 'custom_gallery_shortcode');
 
 
 function file_get_contents_curl($url){
@@ -89,35 +134,15 @@ function posts_pagination($_limit=false) {
 
 function get_category_tags($id) {
     global $wpdb;
-    $tags = $wpdb->get_results
-    ("
-    SELECT DISTINCT
-    terms2.term_id as ID,
-    terms2.name as name,
-    terms2.slug as slug,
-    t2.count as count
-    FROM
-    $wpdb->posts as p1
-    LEFT JOIN $wpdb->term_relationships as r1 ON p1.ID = r1.object_ID
-    LEFT JOIN $wpdb->term_taxonomy as t1 ON r1.term_taxonomy_id = t1.term_taxonomy_id
-    LEFT JOIN $wpdb->terms as terms1 ON t1.term_id = terms1.term_id,
-    $wpdb->posts as p2
-    LEFT JOIN $wpdb->term_relationships as r2 ON p2.ID = r2.object_ID
-    LEFT JOIN $wpdb->term_taxonomy as t2 ON r2.term_taxonomy_id = t2.term_taxonomy_id
-    LEFT JOIN $wpdb->terms as terms2 ON t2.term_id = terms2.term_id
-    WHERE (
-    t1.taxonomy = 'category' AND
-    p1.post_status = 'publish' AND
-    terms1.term_id = '$id' AND
-    t2.taxonomy = 'post_tag' AND
-    p2.post_status = 'publish' AND
-    p1.ID = p2.ID
-    )
-    ORDER BY name ASC
-    ");
+    $tags = $wpdb->get_results (" SELECT DISTINCT terms2.term_id as ID, terms2.name as name, terms2.slug as slug, t2.count as count FROM $wpdb->posts as p1 LEFT JOIN $wpdb->term_relationships as r1 ON p1.ID = r1.object_ID LEFT JOIN $wpdb->term_taxonomy as t1 ON r1.term_taxonomy_id = t1.term_taxonomy_id LEFT JOIN $wpdb->terms as terms1 ON t1.term_id = terms1.term_id, $wpdb->posts as p2 LEFT JOIN $wpdb->term_relationships as r2 ON p2.ID = r2.object_ID LEFT JOIN $wpdb->term_taxonomy as t2 ON r2.term_taxonomy_id = t2.term_taxonomy_id LEFT JOIN $wpdb->terms as terms2 ON t2.term_id = terms2.term_id WHERE ( t1.taxonomy = 'category' AND p1.post_status = 'publish' AND terms1.term_id = '$id' AND t2.taxonomy = 'post_tag' AND p2.post_status = 'publish' AND p1.ID = p2.ID ) ORDER BY name ASC ");
     $count = 0;
     foreach ($tags as $k => $tag) {
         $tags[$k]->link = get_tag_link($tag->ID);
     }
     return $tags;
+}
+
+add_action( 'init', 'my_add_excerpts_to_pages' );
+function my_add_excerpts_to_pages() {
+    add_post_type_support( 'page', 'excerpt' );
 }

@@ -30,43 +30,29 @@
             <div class="col-md-9 col-sm-9 nopadding">
                 <div class="tab-content tab-stacked padding-top-0">
                     <div id="tab_a" class="tab-pane active">
-                        <p><b>The first Junior Chamber was organized in St. Louis, Missouri, U.S.A. on October 13, 1915. On December 11, 1944, representatives from eight (8) nations met in Mexico City and the world organization-Junior Chamber International was founded. </b></p>
-                        <p>
-                            In 1974, the movement crossed the Pacific and the Manila Jaycees was founded with the approval of its Constitution on December 20, 1947. By 1948, eleven new chapters were organized in the following key cities: Cebu, San Pablo, Bacolod, Zamboanga , Davao, iloilo, Lucena, Cabanatuan, Capiz, Cavite and Tacloban.
-                        </p>
-
-                        <p>
-                            The first national convention was held February 11-13, 1949 at the Manila Hotel. The former Hon. Ramon V. del Rosario, Sr. was elected the first National President.
+                        <?=wpautop(get_the_excerpt(21));?>
+                        <p class="text-center">
+                            <a href="<?=site_url('about-us')?>" class="btn btn-default btn-readmore uppercase size-12">Read more <i class="fa fa-fw fa-angle-double-right size-16 nopadding"></i></a>
                         </p>
                     </div>
 
                     <div id="tab_b" class="tab-pane">
-                        <p><b>The second Junior Chamber was organized in St. Louis, Missouri, U.S.A. on October 13, 1915. On December 11, 1944, representatives from eight (8) nations met in Mexico City and the world organization-Junior Chamber International was founded. </b></p>
-                        <p>
-                            In 1974, the movement crossed the Pacific and the Manila Jaycees was founded with the approval of its Constitution on December 20, 1947. By 1948, eleven new chapters were organized in the following key cities: Cebu, San Pablo, Bacolod, Zamboanga , Davao, iloilo, Lucena, Cabanatuan, Capiz, Cavite and Tacloban.
-                        </p>
-
-                        <p>
-                            The first national convention was held February 11-13, 1949 at the Manila Hotel. The former Hon. Ramon V. del Rosario, Sr. was elected the first National President.
+                        <?=wpautop(get_the_excerpt(33));?>
+                        <p class="text-center">
+                            <a href="<?=site_url('our-history')?>" class="btn btn-default btn-readmore uppercase size-12">Read more <i class="fa fa-fw fa-angle-double-right size-16 nopadding"></i></a>
                         </p>
                     </div>
 
                     <div id="tab_c" class="tab-pane">
-                        <p><b>The third Junior Chamber was organized in St. Louis, Missouri, U.S.A. on October 13, 1915. On December 11, 1944, representatives from eight (8) nations met in Mexico City and the world organization-Junior Chamber International was founded. </b></p>
-                        <p>
-                            In 1974, the movement crossed the Pacific and the Manila Jaycees was founded with the approval of its Constitution on December 20, 1947. By 1948, eleven new chapters were organized in the following key cities: Cebu, San Pablo, Bacolod, Zamboanga , Davao, iloilo, Lucena, Cabanatuan, Capiz, Cavite and Tacloban.
-                        </p>
-
-                        <p>
-                            The first national convention was held February 11-13, 1949 at the Manila Hotel. The former Hon. Ramon V. del Rosario, Sr. was elected the first National President.
+                        <?=wpautop(get_the_excerpt(38));?>
+                        <p class="text-center">
+                            <a href="<?=site_url('mission-and-vision')?>" class="btn btn-default btn-readmore uppercase size-12">Read more <i class="fa fa-fw fa-angle-double-right size-16 nopadding"></i></a>
                         </p>
                     </div>
                 </div>
             </div>
             <div class="col-xs-12">
-                <p class="text-center">
-                    <a href="<?=site_url('about-us')?>" class="btn btn-default btn-readmore uppercase size-12">Read more <i class="fa fa-fw fa-angle-double-right size-16 nopadding"></i></a>
-                </p>
+
             </div>
         </div>
     </div>
@@ -79,24 +65,45 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
-                <div class="mason-item mason-item-left embed-responsive embed-responsive-5by6" style="background-image: url('<?=get_stylesheet_directory_uri()?>/assets/img/mason-1.png')">
-                    <div class="gradient-overlay-faded-black"> </div>
-                    <div class="mason-item-details">
-                        <label><a href="#">My World Caravan</a></label>
-                        <p>Working together to protect our shared home</p>
+            <?php
+
+            // Get Latest 2 Projects
+
+            $latestProjects = get_posts([
+                'category_name' => 'projects',
+                'posts_per_page' => 2
+            ]);
+
+            if(isset($latestProjects[0])):
+                ?>
+                <div class="col-sm-4">
+                    <div class="mason-item mason-item-left embed-responsive embed-responsive-5by6" style="background-image: url('<?=(get_the_post_thumbnail_url($latestProjects[0]->ID,'thumb-5by6'))?>')">
+                        <div class="gradient-overlay-faded-black"> </div>
+                        <div class="mason-item-details">
+                            <label><a href="<?=get_the_permalink($latestProjects[0]->ID)?>"><?=get_the_title($latestProjects[0]->ID)?></a></label>
+                            <p><?=get_the_excerpt($latestProjects[0]->ID)?></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="mason-item mason-item-right embed-responsive embed-responsive-5by2" style="background-image: url('<?=get_stylesheet_directory_uri()?>/assets/img/mason-2.png')">
-                    <div class="gradient-overlay-faded-black"> </div>
-                    <div class="mason-item-details">
-                        <label><a href="#">All Eyes on Us</a></label>
-                        <p>Working together to protect our shared home</p>
+                <?php
+            endif;
+            ?>
+
+            <?php
+            if(isset($latestProjects[0])):
+                ?>
+                <div class="col-sm-8">
+                    <div class="mason-item mason-item-right embed-responsive embed-responsive-5by2" style="background-image: url('<?=(get_the_post_thumbnail_url($latestProjects[1]->ID,'thumb-5by2'))?>')">
+                        <div class="gradient-overlay-faded-black"> </div>
+                        <div class="mason-item-details">
+                            <label><a href="<?=get_the_permalink($latestProjects[1]->ID)?>"><?=get_the_title($latestProjects[1]->ID)?></a></label>
+                            <p><?=get_the_excerpt($latestProjects[1]->ID)?></p>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <?php
+            endif;
+            ?>
             <div class="col-sm-8">
                 <div class="mason-item callout alert alert-warning margin-top-20 margin-bottom-0">
                     <div class="row">
