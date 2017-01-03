@@ -1,396 +1,89 @@
 
-			<!-- -->
-			<section>
-				<div class="container">
+<!-- -->
+<section>
+	<div class="container">
 
-					<ul id="portfolio_filter" class="nav nav-pills margin-bottom-60">
-						<li class="filter active"><a data-filter="*" href="#">All</a></li>
-						<li class="filter"><a data-filter=".seminar" href="#">Seminars</a></li>
-						<li class="filter"><a data-filter=".development" href="#">Training</a></li>
-						<li class="filter"><a data-filter=".photography" href="#">Community</a></li>
-						<li class="filter"><a data-filter=".design" href="#">Environment</a></li>
-						<li class="filter"><a data-filter=".seminar" href="#">Health</a></li>
-					</ul>
+		<div id="portfolio" class="portfolio-nogutter">
+			<ul class="nav nav-pills mix-filter margin-bottom-60">
+				<li data-filter="all" class="filter active"><a href="#">All</a></li>
 
-				</div>
+				<?php
 
-				<!--
-					fullwidth - required for full width portfolio
-				-->
-				<div id="portfolio" class="clearfix fullwidth portfolio-nogutter portfolio-isotope portfolio-isotope-3">
+				$tags = get_tags([
+					'taxonomy'=> 'post_tag',
+					'hide_empty' => true,
+				]);
 
+				foreach ($tags as $key => $tag) {
+					?>
+					<li data-filter="<?=$tag->slug?>" class="filter"><a href="#"><?=$tag->name?></a></li>
+					<?php
+				}
+				?>
+			</ul>
 
-                    					<div class="portfolio-item design"><!-- item -->
+			<div class="row mix-grid">
 
-                    						<div class="item-box">
-                    							<figure>
-                    								<span class="item-hover">
-                    									<span class="overlay dark-5"></span>
-                    									<span class="inner">
+				<?php
 
-                    										<!-- lightbox -->
-                    										<a class="ico-rounded lightbox" href="<?=get_stylesheet_directory_uri()?>/assets/img/project-3.jpg" data-plugin-options='{"type":"image"}'>
-                    											<span class="fa fa-plus size-20"></span>
-                    										</a>
+				$projects = get_posts([
+					'category_name' => 'projects',
+					'posts_per_page' => -1
+				]);
 
-                    										<!-- details -->
-                    										<a class="ico-rounded" href="portfolio-single-slider.html">
-                    											<span class="glyphicon glyphicon-option-horizontal size-20"></span>
-                    										</a>
-
-                    									</span>
-                    								</span>
-
-                    								<img class="img-responsive" src="<?=get_stylesheet_directory_uri()?>/assets/img/project-3.jpg" width="800" height="553" alt="">
-                    							</figure>
-
-                    							<div class="item-box-desc">
-                    								<h3>2016 Training Caravan</h3>
-                    								<ul class="list-inline categories nomargin">
-                    									<li><a href="#">Photography</a></li>
-                    									<li><a href="#">Design</a></li>
-                    								</ul>
-                    							</div>
-
-                    						</div>
-
-                    					</div><!-- /item -->
-
-					<div class="portfolio-item seminar"><!-- item -->
-
+				foreach ($projects as $key => $project):
+					$media = get_attached_media( 'image' ,$project->ID);
+					$tags = wp_get_post_tags($project->ID,['fields'=>'slugs']);
+					?>
+					<div class="col-md-3 col-sm-3 mix <?=implode(' ',$tags)?>">
 						<div class="item-box">
 							<figure>
 								<span class="item-hover">
 									<span class="overlay dark-5"></span>
 									<span class="inner">
-
-										<!-- lightbox -->
-										<a class="ico-rounded lightbox" href="<?=get_stylesheet_directory_uri()?>/assets/img/project-1.jpg" data-plugin-options='{"type":"image"}'>
-											<span class="fa fa-plus size-20"></span>
-										</a>
-
 										<!-- details -->
-										<a class="ico-rounded" href="portfolio-single-slider.html">
+										<a class="ico-rounded" href="<?=get_the_permalink($project->ID)?>">
 											<span class="glyphicon glyphicon-option-horizontal size-20"></span>
 										</a>
-
 									</span>
 								</span>
-
-								<img class="img-responsive" src="<?=get_stylesheet_directory_uri()?>/assets/img/project-1.jpg" width="800" height="553" alt="">
+								<?php if(count($media)>1): ?>
+									<div class="owl-carousel buttons-autohide controlls-over nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": true, "transitionStyle":"goDown"}'>
+										<?php
+										foreach ($media as $key => $m) {
+											$image = wp_get_attachment_image_src($m->ID,'thumb-1by1');
+											?>
+											<div>
+												<img class="img-responsive" src="<?=$image[0]?>" alt="">
+											</div>
+											<?php
+										}
+										?>
+									</div>
+								<?php else: ?>
+									<?php if(has_post_thumbnail($project->ID)): ?>
+										<img class="img-responsive" src="<?=get_the_post_thumbnail_url($project->ID,'thumb-1by1')?>" alt="">
+									<?php endif; ?>
+								<?php endif; ?>
 							</figure>
-
 							<div class="item-box-desc">
-								<h3>Livelihood Seminar - Espeleta</h3>
+								<h3  style=" min-height: 36px;"><?=get_the_title($project->ID)?></h3>
 								<ul class="list-inline categories nomargin">
-									<li><a href="#">2017</a></li>
-									<li><a href="#">Seminar</a></li>
-									<li><a href="#">Livelihood</a></li>
+									<?php
+									$tags = wp_get_post_tags($project->ID);
+									foreach($tags as $tag):
+										?>
+										<li><a href="#"><?=$tag->name?></a></li>
+										<?php
+									endforeach;
+									?>
 								</ul>
 							</div>
-
 						</div>
-
-					</div><!-- /item -->
-
-
-					<div class="portfolio-item photography"><!-- item -->
-
-						<div class="item-box">
-							<figure>
-								<span class="item-hover">
-									<span class="overlay dark-5"></span>
-									<span class="inner">
-
-										<!-- lightbox -->
-										<a class="ico-rounded lightbox" href="<?=get_stylesheet_directory_uri()?>/assets/img/project-2.jpg" data-plugin-options='{"type":"image"}'>
-											<span class="fa fa-plus size-20"></span>
-										</a>
-
-										<!-- details -->
-										<a class="ico-rounded" href="portfolio-single-slider.html">
-											<span class="glyphicon glyphicon-option-horizontal size-20"></span>
-										</a>
-
-									</span>
-								</span>
-
-								<img class="img-responsive" src="<?=get_stylesheet_directory_uri()?>/assets/img/project-2.jpg" width="800" height="553" alt="">
-							</figure>
-
-							<div class="item-box-desc">
-								<h3>Loose Coins for Lost Hope</h3>
-								<ul class="list-inline categories nomargin">
-									<li><a href="#">2016</a></li>
-									<li><a href="#">Design</a></li>
-								</ul>
-							</div>
-
-						</div>
-
-					</div><!-- /item -->
-
-
-					<div class="portfolio-item design"><!-- item -->
-
-						<div class="item-box">
-							<figure>
-								<span class="item-hover">
-									<span class="overlay dark-5"></span>
-									<span class="inner">
-
-										<!-- lightbox -->
-										<a class="ico-rounded lightbox" href="<?=get_stylesheet_directory_uri()?>/assets/img/project-4.jpg" data-plugin-options='{"type":"image"}'>
-											<span class="fa fa-plus size-20"></span>
-										</a>
-
-										<!-- details -->
-										<a class="ico-rounded" href="portfolio-single-slider.html">
-											<span class="glyphicon glyphicon-option-horizontal size-20"></span>
-										</a>
-
-									</span>
-								</span>
-
-								<img class="img-responsive" src="<?=get_stylesheet_directory_uri()?>/assets/img/project-4.jpg" width="800" height="553" alt="">
-							</figure>
-
-							<div class="item-box-desc">
-								<h3>Fill in the G.A.P</h3>
-								<ul class="list-inline categories nomargin">
-									<li><a href="#">Photography</a></li>
-									<li><a href="#">Design</a></li>
-								</ul>
-							</div>
-
-						</div>
-
-					</div><!-- /item -->
-
-
-					<div class="portfolio-item development"><!-- item -->
-
-						<div class="item-box">
-							<figure>
-								<span class="item-hover">
-									<span class="overlay dark-5"></span>
-									<span class="inner">
-
-										<!-- lightbox -->
-										<a class="ico-rounded lightbox" href="<?=get_stylesheet_directory_uri()?>/assets/img/project-5.jpg" data-plugin-options='{"type":"image"}'>
-											<span class="fa fa-plus size-20"></span>
-										</a>
-
-										<!-- details -->
-										<a class="ico-rounded" href="portfolio-single-slider.html">
-											<span class="glyphicon glyphicon-option-horizontal size-20"></span>
-										</a>
-
-									</span>
-								</span>
-
-								<img class="img-responsive" src="<?=get_stylesheet_directory_uri()?>/assets/img/project-5.jpg" width="800" height="553" alt="">
-							</figure>
-
-							<div class="item-box-desc">
-								<h3>1M Lapis Donation</h3>
-								<ul class="list-inline categories nomargin">
-									<li><a href="#">Photography</a></li>
-									<li><a href="#">Design</a></li>
-								</ul>
-							</div>
-
-						</div>
-
-					</div><!-- /item -->
-
-
-
-                    					<div class="portfolio-item development"><!-- item -->
-
-                    						<div class="item-box">
-                    							<figure>
-                    								<span class="item-hover">
-                    									<span class="overlay dark-5"></span>
-                    									<span class="inner">
-
-                    										<!-- lightbox -->
-                    										<a class="ico-rounded lightbox" href="<?=get_stylesheet_directory_uri()?>/assets/img/project-6.jpg" data-plugin-options='{"type":"image"}'>
-                    											<span class="fa fa-plus size-20"></span>
-                    										</a>
-
-                    										<!-- details -->
-                    										<a class="ico-rounded" href="portfolio-single-slider.html">
-                    											<span class="glyphicon glyphicon-option-horizontal size-20"></span>
-                    										</a>
-
-                    									</span>
-                    								</span>
-
-                    								<img class="img-responsive" src="<?=get_stylesheet_directory_uri()?>/assets/img/project-6.jpg" width="800" height="553" alt="">
-                    							</figure>
-
-                    							<div class="item-box-desc">
-                    								<h3>August 28, 2016</h3>
-                    								<ul class="list-inline categories nomargin">
-                    									<li><a href="#">Photography</a></li>
-                    									<li><a href="#">Design</a></li>
-                    								</ul>
-                    							</div>
-
-                    						</div>
-
-                    					</div><!-- /item -->
-
-
-					<div class="portfolio-item photography"><!-- item -->
-
-						<div class="item-box">
-							<figure>
-								<span class="item-hover">
-									<span class="overlay dark-5"></span>
-									<span class="inner">
-
-										<!-- lightbox -->
-										<a class="ico-rounded lightbox" href="<?=get_template_directory_uri()?>/assets/images/demo/mockups/1200x800/14-min.jpg" data-plugin-options='{"type":"image"}'>
-											<span class="fa fa-plus size-20"></span>
-										</a>
-
-										<!-- details -->
-										<a class="ico-rounded" href="portfolio-single-slider.html">
-											<span class="glyphicon glyphicon-option-horizontal size-20"></span>
-										</a>
-
-									</span>
-								</span>
-
-								<img class="img-responsive" src="<?=get_template_directory_uri()?>/assets/images/demo/720x400/14-min.jpg" width="800" height="553" alt="">
-							</figure>
-
-							<div class="item-box-desc">
-								<h3>Street Photography</h3>
-								<ul class="list-inline categories nomargin">
-									<li><a href="#">Photography</a></li>
-									<li><a href="#">Design</a></li>
-								</ul>
-							</div>
-
-						</div>
-
-					</div><!-- /item -->
-
-
-					<div class="portfolio-item design"><!-- item -->
-
-						<div class="item-box">
-							<figure>
-								<span class="item-hover">
-									<span class="overlay dark-5"></span>
-									<span class="inner">
-
-										<!-- lightbox -->
-										<a class="ico-rounded lightbox" href="<?=get_template_directory_uri()?>/assets/images/demo/mockups/1200x800/15-min.jpg" data-plugin-options='{"type":"image"}'>
-											<span class="fa fa-plus size-20"></span>
-										</a>
-
-										<!-- details -->
-										<a class="ico-rounded" href="portfolio-single-slider.html">
-											<span class="glyphicon glyphicon-option-horizontal size-20"></span>
-										</a>
-
-									</span>
-								</span>
-
-								<img class="img-responsive" src="<?=get_template_directory_uri()?>/assets/images/demo/mockups/800x553/15-min.jpg" width="800" height="553" alt="">
-							</figure>
-
-							<div class="item-box-desc">
-								<h3>Street Photography</h3>
-								<ul class="list-inline categories nomargin">
-									<li><a href="#">Photography</a></li>
-									<li><a href="#">Design</a></li>
-								</ul>
-							</div>
-
-						</div>
-
-					</div><!-- /item -->
-
-
-					<div class="portfolio-item design"><!-- item -->
-
-						<div class="item-box">
-							<figure>
-								<span class="item-hover">
-									<span class="overlay dark-5"></span>
-									<span class="inner">
-
-										<!-- lightbox -->
-										<a class="ico-rounded lightbox" href="<?=get_template_directory_uri()?>/assets/images/demo/mockups/1200x800/1-min.jpg" data-plugin-options='{"type":"image"}'>
-											<span class="fa fa-plus size-20"></span>
-										</a>
-
-										<!-- details -->
-										<a class="ico-rounded" href="portfolio-single-slider.html">
-											<span class="glyphicon glyphicon-option-horizontal size-20"></span>
-										</a>
-
-									</span>
-								</span>
-
-								<img class="img-responsive" src="<?=get_template_directory_uri()?>/assets/images/demo/720x400/1-min.jpg" width="800" height="553" alt="">
-							</figure>
-
-							<div class="item-box-desc">
-								<h3>Street Photography</h3>
-								<ul class="list-inline categories nomargin">
-									<li><a href="#">Photography</a></li>
-									<li><a href="#">Design</a></li>
-								</ul>
-							</div>
-
-						</div>
-
-					</div><!-- /item -->
-
-
-					<div class="portfolio-item development"><!-- item -->
-
-						<div class="item-box">
-							<figure>
-								<span class="item-hover">
-									<span class="overlay dark-5"></span>
-									<span class="inner">
-
-										<!-- lightbox -->
-										<a class="ico-rounded lightbox" href="<?=get_template_directory_uri()?>/assets/images/demo/mockups/1200x800/11-min.jpg" data-plugin-options='{"type":"image"}'>
-											<span class="fa fa-plus size-20"></span>
-										</a>
-
-										<!-- details -->
-										<a class="ico-rounded" href="portfolio-single-slider.html">
-											<span class="glyphicon glyphicon-option-horizontal size-20"></span>
-										</a>
-
-									</span>
-								</span>
-
-								<img class="img-responsive" src="<?=get_template_directory_uri()?>/assets/images/demo/720x400/2-min.jpg" width="800" height="553" alt="">
-							</figure>
-
-							<div class="item-box-desc">
-								<h3>Street Photography</h3>
-								<ul class="list-inline categories nomargin">
-									<li><a href="#">Photography</a></li>
-									<li><a href="#">Design</a></li>
-								</ul>
-							</div>
-
-						</div>
-
-					</div><!-- /item -->
-
-				</div>
-
-			</section>
-			<!-- / -->
+					</div>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- / -->

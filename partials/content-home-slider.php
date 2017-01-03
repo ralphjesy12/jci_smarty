@@ -2,26 +2,26 @@
 <div id="ei-slider" class="ei-slider" data-tumbwidth="100">
 
     <ul class="ei-slider-large nomargin">
-
-        <!-- Slide 1 -->
-        <li>
-            <img src="<?=get_stylesheet_directory_uri()?>/assets/img/banner.jpg" alt="image01" />
-            <div class="ei-title">
-                <div class="container">
-                        <h2>My World Caravan</h2>
-                        <h3>Li Europan lingues es membres del sam familie. Lor separat existentie es un myth.</h3>
-                </div>
-            </div>
-        </li>
-
+        <?php
+        $_banners = json_decode(do_shortcode( '[SM_GET_BANNER]' ));
+        if(!empty($_banners)){
+            foreach ($_banners as $_banner) {
+                $_banner_url = wp_get_attachment_url($_banner->banner_id);
+                ?>
+                <li>
+                    <img src="<?=$_banner_url?>" alt="image01" />
+                    <div class="ei-title">
+                        <div class="container">
+                            <h2><a href="<?=$_banner->link?>"><?=$_banner->title?></a></h2>
+                            <h3><?=mb_strimwidth(strip_tags(html_entity_decode($_banner->description)), 0, 250, "&hellip;")?></h3>
+                        </div>
+                    </div>
+                </li>
+                <?php
+            }
+        }
+        ?>
     </ul>
-
-    <!-- Thumbnails -->
-    <ul class="ei-slider-thumbs">
-        <li class="ei-slider-element">Current</li>
-        <li><a href="#">Slide 1</a><img src="<?=get_stylesheet_directory_uri()?>/assets/img/banner.jpg" alt="thumb01" /></li>
-    </ul>
-    <!-- /Thumbnails -->
 
 </div>
 <!-- /ELASTIC SLIDER -->

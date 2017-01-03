@@ -9,17 +9,17 @@
             <div class="col-md-3 col-sm-3 nopadding">
                 <ul class="nav nav-tabs nav-stacked">
                     <li class="active">
-                        <a href="#tab_a" data-toggle="tab" class="text-right uppercase">
+                        <a href="#about-us" data-toggle="tab" class="text-right uppercase">
                             About Us
                         </a>
                     </li>
                     <li>
-                        <a href="#tab_b" data-toggle="tab" class="text-right uppercase">
+                        <a href="#our-history" data-toggle="tab" class="text-right uppercase">
                             Our History
                         </a>
                     </li>
                     <li>
-                        <a href="#tab_c" data-toggle="tab" class="text-right uppercase">
+                        <a href="#mission-and-vision" data-toggle="tab" class="text-right uppercase">
                             Mission and Vision
                         </a>
                     </li>
@@ -29,21 +29,21 @@
             <!-- tabs content -->
             <div class="col-md-9 col-sm-9 nopadding">
                 <div class="tab-content tab-stacked padding-top-0">
-                    <div id="tab_a" class="tab-pane active">
+                    <div id="about-us" class="tab-pane active">
                         <?=wpautop(get_the_excerpt(21));?>
                         <p class="text-center">
                             <a href="<?=site_url('about-us')?>" class="btn btn-default btn-readmore uppercase size-12">Read more <i class="fa fa-fw fa-angle-double-right size-16 nopadding"></i></a>
                         </p>
                     </div>
 
-                    <div id="tab_b" class="tab-pane">
+                    <div id="our-history" class="tab-pane">
                         <?=wpautop(get_the_excerpt(33));?>
                         <p class="text-center">
                             <a href="<?=site_url('our-history')?>" class="btn btn-default btn-readmore uppercase size-12">Read more <i class="fa fa-fw fa-angle-double-right size-16 nopadding"></i></a>
                         </p>
                     </div>
 
-                    <div id="tab_c" class="tab-pane">
+                    <div id="mission-and-vision" class="tab-pane">
                         <?=wpautop(get_the_excerpt(38));?>
                         <p class="text-center">
                             <a href="<?=site_url('mission-and-vision')?>" class="btn btn-default btn-readmore uppercase size-12">Read more <i class="fa fa-fw fa-angle-double-right size-16 nopadding"></i></a>
@@ -132,34 +132,74 @@
         </div>
         <div class="row">
             <div class="col-sm-4 col-xs-2 col-md-1-5 text-center">
-                <img class="img-responsive img-circle" src="<?=get_stylesheet_directory_uri()?>/assets/img/invest.png" alt="img" style="height:150px;width:150px;">
+                <?php
+                $page = get_posts([
+                    'name' => 'loose-coins-for-lost-hope',
+                    'post_status' => 'publish',
+                    'posts_per_page' => 1
+                ]);
+                $page = $page[0];
+                ?>
+                <img class="img-responsive img-circle" src="<?=(get_the_post_thumbnail_url($page->ID,'thumb-1by1'))?>" alt="img" style="height:150px;width:150px;">
                 <h3 class="margin-top-10 uppercase">Invest</h3>
-                <p>Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot</p>
-                <a href="#" class="btn btn-link btn-sm">READ MORE</a>
+                <p style="min-height:170px;"><?=get_the_excerpt($page->ID)?></p>
+                <a href="<?=get_the_permalink($page->ID)?>" class="btn btn-link btn-sm">READ MORE</a>
             </div>
             <div class="col-sm-4 col-xs-2 col-md-1-5 text-center">
-                <img class="img-responsive img-circle" src="<?=get_stylesheet_directory_uri()?>/assets/img/connect.png" alt="img" style="height:150px;width:150px;">
+                <?php
+                $page = get_posts([
+                    'name' => 'bag-to-school',
+                    'post_status' => 'publish',
+                    'posts_per_page' => 1
+                ]);
+                $page = $page[0];
+                ?>
+                <img class="img-responsive img-circle" src="<?=(get_the_post_thumbnail_url($page->ID,'thumb-1by1'))?>" alt="img" style="height:150px;width:150px;">
                 <h3 class="margin-top-10 uppercase">Connect</h3>
-                <p>Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot</p>
-                <a href="#" class="btn btn-link btn-sm">READ MORE</a>
+                <p style="min-height:170px;"><?=get_the_excerpt($page->ID)?></p>
+                <a href="<?=get_the_permalink($page->ID)?>" class="btn btn-link btn-sm">READ MORE</a>
             </div>
             <div class="col-sm-4 col-xs-2 col-md-1-5 text-center">
-                <img class="img-responsive img-circle" src="<?=get_stylesheet_directory_uri()?>/assets/img/collaborate.png" alt="img" style="height:150px;width:150px;">
+                <?php
+                $page = get_posts([
+                    'name' => 'wagayway-university',
+                    'post_status' => 'publish',
+                    'posts_per_page' => 1
+                ]);
+                $page = $page[0];
+                ?>
+                <img class="img-responsive img-circle" src="<?=(get_the_post_thumbnail_url($page->ID,'thumb-1by1'))?>" alt="img" style="height:150px;width:150px;">
                 <h3 class="margin-top-10 uppercase">Collaborate</h3>
-                <p>Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot</p>
-                <a href="#" class="btn btn-link btn-sm">READ MORE</a>
+                <p style="min-height:170px;"><?=get_the_excerpt($page->ID)?></p>
+                <a href="<?=get_the_permalink($page->ID)?>" class="btn btn-link btn-sm">READ MORE</a>
             </div>
             <div class="col-sm-4 col-xs-2 col-md-1-5 text-center">
-                <img class="img-responsive img-circle" src="<?=get_stylesheet_directory_uri()?>/assets/img/motivate.png" alt="img" style="height:150px;width:150px;">
+                <?php
+                $page = get_posts([
+                    'name' => 'build-and-unite-as-one',
+                    'post_status' => 'publish',
+                    'posts_per_page' => 1
+                ]);
+                $page = $page[0];
+                ?>
+                <img class="img-responsive img-circle" src="<?=(get_the_post_thumbnail_url($page->ID,'thumb-1by1'))?>" alt="img" style="height:150px;width:150px;">
                 <h3 class="margin-top-10 uppercase">Motivate</h3>
-                <p>Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot</p>
-                <a href="#" class="btn btn-link btn-sm">READ MORE</a>
+                <p style="min-height:170px;"><?=get_the_excerpt($page->ID)?></p>
+                <a href="<?=get_the_permalink($page->ID)?>" class="btn btn-link btn-sm">READ MORE</a>
             </div>
             <div class="col-sm-4 col-xs-2 col-md-1-5 text-center">
-                <img class="img-responsive img-circle" src="<?=get_stylesheet_directory_uri()?>/assets/img/impact.png" alt="img" style="height:150px;width:150px;">
+                <?php
+                $page = get_posts([
+                    'name' => 'fill-in-the-g-a-p',
+                    'post_status' => 'publish',
+                    'posts_per_page' => 1
+                ]);
+                $page = $page[0];
+                ?>
+                <img class="img-responsive img-circle" src="<?=(get_the_post_thumbnail_url($page->ID,'thumb-1by1'))?>" alt="img" style="height:150px;width:150px;">
                 <h3 class="margin-top-10 uppercase">Impact</h3>
-                <p>Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot</p>
-                <a href="#" class="btn btn-link btn-sm">READ MORE</a>
+                <p style="min-height:170px;"><?=get_the_excerpt($page->ID)?></p>
+                <a href="<?=get_the_permalink($page->ID)?>" class="btn btn-link btn-sm">READ MORE</a>
             </div>
         </div>
         <div class="row">

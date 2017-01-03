@@ -129,7 +129,7 @@ data-background="<?=get_template_directory_uri()?>/assets/images/boxed_backgroun
                         <img src="<?=get_stylesheet_directory_uri()?>/assets/img/coming-soon.png" style="display:block;margin:0 auto;height:100px;">
 
                         <div style="max-width:550px; margin:auto; margin-top:60px; margin-bottom:80px;">
-                            <div class="countdown squared dark theme-style" data-labels="years,months,weeks,days,hour,min,sec" data-from="January 01, 2017 00:00:00"><!-- Example Date From: December 31, 2018 15:03:26 --></div>
+                            <div class="countdown squared dark theme-style" data-labels="years,months,weeks,days,hour,min,sec" data-from="January 02, 2017 08:00:00"><!-- Example Date From: December 31, 2018 15:03:26 --></div>
                         </div>
                         <a href="#" id="shareBtn" class=" btn btn-block btn-social btn-facebook" style=" max-width: 300px; text-align: center; margin: 0 auto;
 ">

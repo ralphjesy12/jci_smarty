@@ -13,10 +13,8 @@ function unhook_thematic_functions() {
     add_image_size('thumb-5by6',360,432,true);
     add_image_size('thumb-5by2',750,300,true);
     add_image_size('thumb-3by2',600,400,true);
+    add_image_size('thumb-1by1',300,300,true);
     add_image_size('thumb-post-single',800,350,true);
-
-
-
 
 }
 add_action( 'init', 'unhook_thematic_functions' );
